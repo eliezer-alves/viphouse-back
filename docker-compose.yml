@@ -1,0 +1,63 @@
+version: '3.5'
+
+services:
+  # postgres
+  db:
+    container_name: postgres
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USERNAME: postgres
+      POSTGRES_PASSWORD: password
+    command: postgres -c 'max_connections=450'
+    volumes:
+      - ./docker/postgresql.conf:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+    deploy:
+      resources:
+        limits:
+          cpus: '0.45'
+          memory: '1.5G'
+        # reservations:
+        #   cpus: '0.25'
+        #   memory: 500M
+
+  # api
+  api-01:
+    container_name: viphouse-api-01
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: viphouse-api
+    environment:
+      - PORT=3001
+    ports:
+      - '3001:3001'
+    depends_on:
+      - db
+    deploy:
+      resources:
+        limits:
+          cpus: '0.45'
+          memory: 500M
+        # reservations:
+        #   cpus: '0.25'
+        #   memory: 256M
+
+    # nginx
+    # nginx:
+    #     container_name: viphouse-backend-nginx
+    #     image: nginx:alpine
+    #     volumes:
+    #         - ./docker/nginx.conf:/etc/nginx/nginx.conf
+    #     network_mode: host
+    #     depends_on:
+    #         - api-01
+    #         - api-02
+    #     deploy:
+    #         resources:
+    #             limits:
+    #                 cpus: '0.1'
+    #                 memory: '0.2GB'
