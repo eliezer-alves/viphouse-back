@@ -1,0 +1,22 @@
+version: '3.5'
+
+services:
+  # postgres
+  db:
+    container_name: postgres
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USERNAME: postgres
+      POSTGRES_PASSWORD: password
+    command: postgres -c 'max_connections=450'
+    volumes:
+      - ./docker/postgresql.conf:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+    deploy:
+      resources:
+        limits:
+          cpus: '0.45'
+          memory: '1.5G'
