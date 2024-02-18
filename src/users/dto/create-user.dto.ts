@@ -1,4 +1,5 @@
 import { IsEmail, IsNotEmpty, IsString, MinLength } from 'class-validator';
+import { EmailNotRegistered } from '../validation-rules/email-not-registered.rule';
 
 export class CreateUserDto {
   @IsNotEmpty()
@@ -8,6 +9,7 @@ export class CreateUserDto {
 
   @IsNotEmpty()
   @IsEmail()
+  @EmailNotRegistered({ message: 'email already registered' })
   email: string;
 
   @IsNotEmpty()
