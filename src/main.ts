@@ -29,6 +29,7 @@ async function bootstrap() {
       'https://www.viphouse.com',
       'eliezer.c.alves2015@gmail.com',
     )
+    .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
