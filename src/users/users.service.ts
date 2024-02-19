@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { User } from './entities/user.entity';
 import { UsersRepository } from './users.repository';
+import { ShowUserDto } from './dto/show-user.dto';
 
 @Injectable()
 export class UsersService {
@@ -15,9 +16,11 @@ export class UsersService {
     return this.repository.findOne(username);
   }
 
-  async findUniqueByEmail(
-    email: string,
-  ): Promise<Omit<User, 'password'> | undefined> {
+  async findById(id: string): Promise<ShowUserDto | undefined> {
+    return this.repository.findById(id);
+  }
+
+  async findUniqueByEmail(email: string): Promise<ShowUserDto | undefined> {
     return this.repository.findUniqueByEmail(email);
   }
 }
