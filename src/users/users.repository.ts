@@ -1,11 +1,19 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { PrismaService } from 'src/prisma.service';
-import { User } from './entities/user.entity';
 import { ShowUserDto } from './dto/show-user.dto';
+import { User } from './entities/user.entity';
 
 @Injectable()
 export class UsersRepository {
+  private defaultSelect = {
+    id: true,
+    email: true,
+    username: true,
+    name: true,
+    password: false,
+  };
+
   constructor(private prisma: PrismaService) {}
 
   create(user: Prisma.UserCreateInput) {
@@ -17,13 +25,7 @@ export class UsersRepository {
       where: {
         username,
       },
-      select: {
-        id: true,
-        email: true,
-        username: true,
-        name: true,
-        password: true,
-      },
+      select: { ...this.defaultSelect, password: true },
     });
   }
 
@@ -32,13 +34,7 @@ export class UsersRepository {
       where: {
         id: id,
       },
-      select: {
-        id: true,
-        email: true,
-        username: true,
-        name: true,
-        password: false,
-      },
+      select: this.defaultSelect,
     });
   }
 
@@ -47,13 +43,7 @@ export class UsersRepository {
       where: {
         username: username,
       },
-      select: {
-        id: true,
-        email: true,
-        username: true,
-        name: true,
-        password: false,
-      },
+      select: this.defaultSelect,
     });
   }
 }
