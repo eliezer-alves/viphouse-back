@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
-import { PrismaService } from 'src/prisma.service';
+import { Prisma, PrismaClient } from '@prisma/client';
 import { IUserRepository } from '../user.repository.interface';
 
 @Injectable()
@@ -13,7 +12,7 @@ export class UserRepository implements IUserRepository {
     password: false,
   };
 
-  constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaClient) {}
 
   create(user: Prisma.UserCreateInput) {
     return this.prisma.user.create({ data: user });
