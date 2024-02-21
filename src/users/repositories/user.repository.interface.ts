@@ -1,4 +1,4 @@
-import { IGenericRepository } from 'src/repository/generic.repository';
+import { IGenericRepository } from 'src/shared/repositories/generic.repository.interface';
 import { User } from '../entities/user.entity';
 
 export abstract class IUserRepository extends IGenericRepository<User> {
