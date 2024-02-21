@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
-import { UsersRepository } from './users.repository';
 import { ShowUserDto } from './dto/show-user.dto';
 import * as bcrypt from 'bcrypt';
 import { User } from './entities/user.entity';
+import { IUserRepository } from './repositories/user.repository.interface';
+import { CreateUserDto } from './dto/create-user.dto';
 
 @Injectable()
 export class UsersService {
-  constructor(private repository: UsersRepository) {}
+  constructor(private repository: IUserRepository) {}
 
   private async encryptPassword(password: string): Promise<string> {
     const saltOrRounds = 10;
@@ -16,17 +16,18 @@ export class UsersService {
     return hash;
   }
 
-  async create(user: Prisma.UserCreateInput) {
+  async create(user: CreateUserDto) {
     user.password = await this.encryptPassword(user.password);
-    return this.repository.create(user);
+
+    return this.repository.create({ ...user, username: user.email });
   }
 
   async show(id: string): Promise<ShowUserDto | undefined> {
-    return this.repository.findById(id);
+    return this.repository.find(id);
   }
 
   async findForAuth(username: string): Promise<User | undefined> {
-    return this.repository.findOne(username);
+    return this.repository.findByUsername(username);
   }
 
   async findUniqueByEmail(email: string): Promise<ShowUserDto | undefined> {

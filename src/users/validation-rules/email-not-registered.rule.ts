@@ -4,11 +4,11 @@ import {
   ValidatorConstraint,
   ValidatorConstraintInterface,
 } from 'class-validator';
-import { UsersRepository } from '../users.repository';
+import { IUserRepository } from '../repositories/user.repository.interface';
 
 @ValidatorConstraint({ async: true })
 export class IsEmailNotRegistered implements ValidatorConstraintInterface {
-  constructor(private readonly usersRepository: UsersRepository) {}
+  constructor(private readonly usersRepository: IUserRepository) {}
 
   validate(email: any) {
     if (!email || typeof email !== 'string') return false;
