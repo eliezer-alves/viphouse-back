@@ -4,7 +4,7 @@ import {
   ValidatorConstraint,
   ValidatorConstraintInterface,
 } from 'class-validator';
-import { IUserRepository } from '../repositories/user.repository.interface';
+import { IUserRepository } from '../repositories';
 
 @ValidatorConstraint({ async: true })
 export class IsEmailNotRegistered implements ValidatorConstraintInterface {
