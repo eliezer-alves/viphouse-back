@@ -14,6 +14,6 @@ model User {
   id        String  @db.VarChar(36)  @id @default(uuid())
   email     String
   username  String  @unique
-  name      String?
+  name      String
   password  String
 }
