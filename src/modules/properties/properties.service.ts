@@ -1,9 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { CreatePropertyDto } from './dto/create-property.dto';
 import { UpdatePropertyDto } from './dto/update-property.dto';
+import { IPropertyRepository } from './repositories';
 
 @Injectable()
 export class PropertiesService {
+  constructor(private repository: IPropertyRepository) {}
+
   create(createPropertyDto: CreatePropertyDto) {
     return createPropertyDto;
   }
