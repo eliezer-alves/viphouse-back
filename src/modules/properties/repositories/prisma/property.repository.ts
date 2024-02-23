@@ -13,16 +13,25 @@ type PropertyCreateInput = Omit<
 export class PropertyRepository implements IPropertyRepository {
   constructor(private prisma: PrismaClient) {}
 
-  create({ propertyTypeId, ...property }: PropertyCreateInput) {
+  create({ propertyTypeId, ...data }: PropertyCreateInput) {
     return this.prisma.property.create({
       data: {
-        ...property,
+        ...data,
         propertyType: {
           connect: {
             id: propertyTypeId,
           },
         },
       } as Prisma.PropertyCreateInput,
+    });
+  }
+
+  update(id: string, data: Prisma.PropertyUpdateInput) {
+    return this.prisma.property.update({
+      where: {
+        id,
+      },
+      data,
     });
   }
 

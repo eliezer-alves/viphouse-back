@@ -42,8 +42,8 @@ export class UsersController {
     },
   })
   @Post('create')
-  async create(@Body() user: CreateUserDto) {
-    return this.userService.create(user);
+  async create(@Body() data: CreateUserDto) {
+    return this.userService.create(data);
   }
 
   @ApiOperation({ summary: 'Data of current logged user.' })

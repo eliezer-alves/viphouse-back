@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma, PrismaClient } from '@prisma/client';
 import { IUserRepository } from '../user.repository.interface';
+import { User } from '../../entities/user.entity';
 
 @Injectable()
 export class UserRepository implements IUserRepository {
@@ -49,6 +50,16 @@ export class UserRepository implements IUserRepository {
 
   list() {
     return this.prisma.user.findMany();
+  }
+
+  update(id: string, data: Prisma.UserUpdateInput): Promise<User> {
+    return this.prisma.user.update({
+      where: {
+        id: id,
+      },
+      data,
+      select: this.defaultSelect,
+    });
   }
 
   remove(id: string) {

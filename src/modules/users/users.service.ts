@@ -16,10 +16,10 @@ export class UsersService {
     return hash;
   }
 
-  async create(user: CreateUserDto) {
-    user.password = await this.encryptPassword(user.password);
+  async create(data: CreateUserDto) {
+    data.password = await this.encryptPassword(data.password);
 
-    return this.repository.create({ ...user, username: user.email });
+    return this.repository.create({ ...data, username: data.email });
   }
 
   async show(id: string): Promise<ShowUserDto | undefined> {
