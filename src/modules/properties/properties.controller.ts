@@ -42,4 +42,14 @@ export class PropertiesController {
   remove(@Param('id') id: string) {
     return this.propertiesService.remove(+id);
   }
+
+  @Get('/resources/types')
+  listAvailablePropertyTypes() {
+    return this.propertiesService.listAvailablePropertyTypes();
+  }
+
+  @Get('/resources/features')
+  listAvailablePropertyFeatures() {
+    return this.propertiesService.listAvailablePropertyFeatures();
+  }
 }

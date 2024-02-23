@@ -26,4 +26,12 @@ export class PropertiesService {
   remove(id: number) {
     return `This action removes a #${id} property`;
   }
+
+  listAvailablePropertyFeatures() {
+    return this.repository.availablePropertyFeatures();
+  }
+
+  listAvailablePropertyTypes() {
+    return this.repository.availablePropertyTypes();
+  }
 }

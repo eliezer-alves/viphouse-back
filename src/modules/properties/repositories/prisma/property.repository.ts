@@ -37,4 +37,15 @@ export class PropertyRepository implements IPropertyRepository {
       },
     });
   }
+
+  availablePropertyFeatures() {
+    return this.prisma.propertyFeature.findMany();
+  }
+
+  availablePropertyTypes() {
+    return this.prisma.propertyType.findMany().then((types) => {
+      console.log(types);
+      return types;
+    });
+  }
 }
