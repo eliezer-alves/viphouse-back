@@ -9,11 +9,13 @@ import {
 } from './repositories';
 import { PrismaClient } from '@prisma/client';
 import { PrismaClientConnection } from 'src/infra';
+import { IsValidPropertyTypeId } from './validation-rules';
 
 @Module({
   controllers: [PropertiesController],
   providers: [
     PropertiesService,
+    IsValidPropertyTypeId,
     {
       provide: PrismaClient,
       useClass: PrismaClientConnection,

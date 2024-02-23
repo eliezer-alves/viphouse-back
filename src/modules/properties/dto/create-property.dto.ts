@@ -6,6 +6,7 @@ import {
   MaxLength,
   MinLength,
 } from 'class-validator';
+import { ValidPropertyTypeId } from '../validation-rules';
 
 export class CreatePropertyDto {
   @ApiProperty({
@@ -29,7 +30,7 @@ export class CreatePropertyDto {
     description:
       'Property type id. A listing of available property types is provided in "/properties/types"',
   })
-  @IsNotEmpty()
+  @ValidPropertyTypeId({ message: 'porperyTypeId does not exist' })
   @IsNumber()
   propertyTypeId: number;
 }
