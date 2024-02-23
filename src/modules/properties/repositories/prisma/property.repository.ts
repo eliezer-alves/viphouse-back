@@ -37,26 +37,4 @@ export class PropertyRepository implements IPropertyRepository {
       },
     });
   }
-
-  availablePropertyFeatures() {
-    return this.prisma.propertyFeature.findMany({
-      select: {
-        id: true,
-        name: true,
-        createdAt: false,
-        updatedAt: false,
-      },
-    });
-  }
-
-  availablePropertyTypes() {
-    return this.prisma.propertyType.findMany({
-      select: {
-        id: true,
-        name: true,
-        createdAt: false,
-        updatedAt: false,
-      },
-    });
-  }
 }

@@ -1,11 +1,19 @@
 import { Injectable } from '@nestjs/common';
 import { CreatePropertyDto } from './dto/create-property.dto';
 import { UpdatePropertyDto } from './dto/update-property.dto';
-import { IPropertyRepository } from './repositories';
+import {
+  IPropertyFeatureRepository,
+  IPropertyRepository,
+  IPropertyTypeRepository,
+} from './repositories';
 
 @Injectable()
 export class PropertiesService {
-  constructor(private repository: IPropertyRepository) {}
+  constructor(
+    private propertyRepository: IPropertyRepository,
+    private propertyTyeRepository: IPropertyTypeRepository,
+    private propertyFeatureRepository: IPropertyFeatureRepository,
+  ) {}
 
   create(createPropertyDto: CreatePropertyDto) {
     return createPropertyDto;
@@ -28,10 +36,10 @@ export class PropertiesService {
   }
 
   listAvailablePropertyFeatures() {
-    return this.repository.availablePropertyFeatures();
+    return this.propertyFeatureRepository.list();
   }
 
   listAvailablePropertyTypes() {
-    return this.repository.availablePropertyTypes();
+    return this.propertyTyeRepository.list();
   }
 }

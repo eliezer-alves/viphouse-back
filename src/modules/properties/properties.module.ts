@@ -1,7 +1,12 @@
 import { Module } from '@nestjs/common';
 import { PropertiesService } from './properties.service';
 import { PropertiesController } from './properties.controller';
-import { IPropertyRepository, PrismaRepository } from './repositories';
+import {
+  IPropertyFeatureRepository,
+  IPropertyRepository,
+  IPropertyTypeRepository,
+  PrismaRepository,
+} from './repositories';
 import { PrismaClient } from '@prisma/client';
 import { PrismaClientConnection } from 'src/infra';
 
@@ -16,6 +21,14 @@ import { PrismaClientConnection } from 'src/infra';
     {
       provide: IPropertyRepository,
       useClass: PrismaRepository.PropertyRepository,
+    },
+    {
+      provide: IPropertyTypeRepository,
+      useClass: PrismaRepository.PropertyTypeRepository,
+    },
+    {
+      provide: IPropertyFeatureRepository,
+      useClass: PrismaRepository.PropertyFeatureRepository,
     },
   ],
 })
