@@ -38,7 +38,7 @@ model PropertyFeature {
 model Property {
   id              String  @db.VarChar(36)  @id @default(uuid())
   name            String
-  description     String
+  description     String?
   propertyType    PropertyType    @relation(fields: [propertyTypeId], references: [id])
   propertyTypeId  Int
   features        FeaturesOnPproperties[]
