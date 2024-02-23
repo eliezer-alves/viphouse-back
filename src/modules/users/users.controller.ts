@@ -57,7 +57,7 @@ export class UsersController {
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   @Get('me')
-  getProfile(@Request() req) {
+  showProfile(@Request() req) {
     return this.userService.show(req.user.userId);
   }
 }
