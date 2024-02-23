@@ -10,6 +10,8 @@ export class UserRepository implements IUserRepository {
     username: true,
     name: true,
     password: false,
+    createdAt: true,
+    updatedAt: true,
   };
 
   constructor(private prisma: PrismaClient) {}
