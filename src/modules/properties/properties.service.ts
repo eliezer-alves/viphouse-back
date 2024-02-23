@@ -16,23 +16,23 @@ export class PropertiesService {
   ) {}
 
   create(createPropertyDto: CreatePropertyDto) {
-    return createPropertyDto;
+    return this.propertyRepository.create(createPropertyDto);
   }
 
   findAll() {
-    return `This action returns all properties`;
+    return this.propertyRepository.list();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} property`;
+  findOne(id: string) {
+    return this.propertyRepository.find(id);
   }
 
-  update(id: number, updatePropertyDto: UpdatePropertyDto) {
+  update(id: string, updatePropertyDto: UpdatePropertyDto) {
     return updatePropertyDto;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} property`;
+  remove(id: string) {
+    return this.propertyRepository.remove(id);
   }
 
   listAvailablePropertyFeatures() {

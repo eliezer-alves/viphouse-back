@@ -37,4 +37,16 @@ export class PropertyRepository implements IPropertyRepository {
       },
     });
   }
+
+  list() {
+    return this.prisma.property.findMany();
+  }
+
+  remove(id: string) {
+    return this.prisma.property.delete({
+      where: {
+        id,
+      },
+    });
+  }
 }

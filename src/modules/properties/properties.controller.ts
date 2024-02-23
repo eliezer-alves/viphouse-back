@@ -26,13 +26,13 @@ export class PropertiesController {
   }
 
   @Get()
-  findAll() {
+  list() {
     return this.propertiesService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.propertiesService.findOne(+id);
+  show(@Param('id') id: string) {
+    return this.propertiesService.findOne(id);
   }
 
   @Patch(':id')
@@ -40,12 +40,12 @@ export class PropertiesController {
     @Param('id') id: string,
     @Body() updatePropertyDto: UpdatePropertyDto,
   ) {
-    return this.propertiesService.update(+id, updatePropertyDto);
+    return this.propertiesService.update(id, updatePropertyDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.propertiesService.remove(+id);
+    return this.propertiesService.remove(id);
   }
 
   @ApiOperation({

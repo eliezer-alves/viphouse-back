@@ -46,4 +46,16 @@ export class UserRepository implements IUserRepository {
       select: this.defaultSelect,
     });
   }
+
+  list() {
+    return this.prisma.user.findMany();
+  }
+
+  remove(id: string) {
+    return this.prisma.user.delete({
+      where: {
+        id,
+      },
+    });
+  }
 }
