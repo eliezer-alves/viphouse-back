@@ -11,9 +11,50 @@ datasource db {
 }
 
 model User {
-  id        String  @db.VarChar(36)  @id @default(uuid())
-  email     String
-  username  String  @unique
-  name      String
-  password  String
+  id          String  @db.VarChar(36)  @id @default(uuid())
+  email       String
+  username    String  @unique
+  name        String
+  password    String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
+
+model PropertyType {
+  id          Int     @default(autoincrement()) @id
+  name        String
+  properties  Property[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+model PropertyFeature {
+  id          Int     @default(autoincrement()) @id
+  name        String
+  properties  FeaturesOnPproperties[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Property {
+  id              String  @db.VarChar(36)  @id @default(uuid())
+  name            String
+  description     String
+  propertyType    PropertyType    @relation(fields: [propertyTypeId], references: [id])
+  propertyTypeId  Int
+  features        FeaturesOnPproperties[]
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model FeaturesOnPproperties {
+  feature       PropertyFeature @relation(fields: [featureId], references: [id])
+  featureId     Int
+  property      Property @relation(fields: [propertyId], references: [id])
+  propertyId    String  @db.VarChar(36)
+  assignedAt    DateTime @default(now())
+  assignedBy    String
+
+  @@id([featureId, propertyId])
+}
+
+
