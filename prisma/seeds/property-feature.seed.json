@@ -1,0 +1,29 @@
+[
+  {
+    "name": "bedroom"
+  },
+  {
+    "name": "bathroom"
+  },
+  {
+    "name": "suite"
+  },
+  {
+    "name": "kitchen"
+  },
+  {
+    "name": "garage"
+  },
+  {
+    "name": "livingRoom"
+  },
+  {
+    "name": "laundryRoom"
+  },
+  {
+    "name": "office"
+  },
+  {
+    "name": "garden"
+  }
+]
