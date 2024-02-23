@@ -1,29 +1,29 @@
 [
   {
-    "name": "bedroom"
+    "name": "quarto"
   },
   {
-    "name": "bathroom"
+    "name": "banheiro"
   },
   {
-    "name": "suite"
+    "name": "suíte"
   },
   {
-    "name": "kitchen"
+    "name": "cozinha"
   },
   {
-    "name": "garage"
+    "name": "garagem"
   },
   {
-    "name": "livingRoom"
+    "name": "sala de estar"
   },
   {
-    "name": "laundryRoom"
+    "name": "lavanderia"
   },
   {
-    "name": "office"
+    "name": "escritório"
   },
   {
-    "name": "garden"
+    "name": "jardim"
   }
 ]
