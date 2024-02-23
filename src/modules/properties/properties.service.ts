@@ -15,8 +15,8 @@ export class PropertiesService {
     private propertyFeatureRepository: IPropertyFeatureRepository,
   ) {}
 
-  create(createPropertyDto: CreatePropertyDto) {
-    return this.propertyRepository.create(createPropertyDto);
+  create(data: CreatePropertyDto) {
+    return this.propertyRepository.create(data);
   }
 
   findAll() {
@@ -27,8 +27,8 @@ export class PropertiesService {
     return this.propertyRepository.find(id);
   }
 
-  update(id: string, updatePropertyDto: UpdatePropertyDto) {
-    return updatePropertyDto;
+  update(id: string, data: UpdatePropertyDto) {
+    return data;
   }
 
   remove(id: string) {
