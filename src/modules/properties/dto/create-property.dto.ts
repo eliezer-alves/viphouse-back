@@ -2,6 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import {
   IsNotEmpty,
   IsNumber,
+  IsOptional,
   IsString,
   MaxLength,
   MinLength,
@@ -37,50 +38,60 @@ export class CreatePropertyDto {
     description: 'Number of rooms in the property.',
   })
   @IsNumber()
+  @IsOptional()
   room: number;
-  @IsNumber()
   @ApiProperty({
     description: 'Number of bathrooms in the property.',
   })
+  @IsNumber()
+  @IsOptional()
   bathroom: number;
   @ApiProperty({
     description: 'Number of suites in the property.',
   })
   @IsNumber()
+  @IsOptional()
   suite: number;
   @ApiProperty({
     description: 'Number of kitchens in the property.',
   })
   @IsNumber()
+  @IsOptional()
   kitchen: number;
   @ApiProperty({
     description: 'Number of living rooms in the property.',
   })
   @IsNumber()
+  @IsOptional()
   livingRoom: number;
   @ApiProperty({
     description: 'Number of garages in the property.',
   })
   @IsNumber()
+  @IsOptional()
   garage: number;
   @ApiProperty({
     description: 'Number of laundry rooms in the property.',
   })
   @IsNumber()
+  @IsOptional()
   laundry: number;
   @ApiProperty({
     description: 'Number of pools in the property.',
   })
   @IsNumber()
+  @IsOptional()
   pool: number;
   @ApiProperty({
     description: 'Number of offices in the property.',
   })
   @IsNumber()
+  @IsOptional()
   office: number;
   @ApiProperty({
     description: 'Number of gardens in the property.',
   })
   @IsNumber()
+  @IsOptional()
   garden: number;
 }
