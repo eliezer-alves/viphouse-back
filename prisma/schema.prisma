@@ -33,17 +33,17 @@ model Property {
   name            String
   description     String?
   propertyType    PropertyType    @relation(fields: [propertyTypeId], references: [id])
-  propertyTypeId  Int  
-  room            Int  
-  bathroom        Int
-  suite           Int
-  kitchen         Int
-  livingRoom      Int 
-  garage          Int
-  laundry         Int
-  pool            Int
-  office          Int
-  garden          Int
+  propertyTypeId  Int @default(0)
+  room            Int @default(0)
+  bathroom        Int @default(0)
+  suite           Int @default(0)
+  kitchen         Int @default(0)
+  livingRoom      Int @default(0)
+  garage          Int @default(0)
+  laundry         Int @default(0)
+  pool            Int @default(0)
+  office          Int @default(0)
+  garden          Int @default(0)
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 }
