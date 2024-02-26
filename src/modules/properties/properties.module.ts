@@ -2,7 +2,6 @@ import { Module } from '@nestjs/common';
 import { PropertiesService } from './properties.service';
 import { PropertiesController } from './properties.controller';
 import {
-  IPropertyFeatureRepository,
   IPropertyRepository,
   IPropertyTypeRepository,
   PrismaRepository,
@@ -27,10 +26,6 @@ import { IsValidPropertyTypeId } from './validation-rules';
     {
       provide: IPropertyTypeRepository,
       useClass: PrismaRepository.PropertyTypeRepository,
-    },
-    {
-      provide: IPropertyFeatureRepository,
-      useClass: PrismaRepository.PropertyFeatureRepository,
     },
   ],
 })

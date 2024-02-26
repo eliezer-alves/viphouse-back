@@ -1,14 +1,3 @@
-export const propertyFeaturesListExample = [
-  {
-    id: 11,
-    name: 'quarto',
-  },
-  {
-    id: 15,
-    name: 'banheiro',
-  },
-];
-
 export const propertyTypesListExample = [
   {
     id: 6,

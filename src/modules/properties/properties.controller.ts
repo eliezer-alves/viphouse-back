@@ -11,18 +11,15 @@ import { PropertiesService } from './properties.service';
 import { CreatePropertyDto } from './dto/create-property.dto';
 import { UpdatePropertyDto } from './dto/update-property.dto';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
-import {
-  propertyFeaturesListExample,
-  propertyTypesListExample,
-} from './data.example';
+import { propertyTypesListExample } from './data.example';
 
 @Controller('properties')
 export class PropertiesController {
   constructor(private readonly propertiesService: PropertiesService) {}
 
   @Post()
-  create(@Body() createPropertyDto: CreatePropertyDto) {
-    return this.propertiesService.create(createPropertyDto);
+  create(@Body() data: CreatePropertyDto) {
+    return this.propertiesService.create(data);
   }
 
   @Get()
@@ -36,11 +33,8 @@ export class PropertiesController {
   }
 
   @Patch(':id')
-  update(
-    @Param('id') id: string,
-    @Body() updatePropertyDto: UpdatePropertyDto,
-  ) {
-    return this.propertiesService.update(id, updatePropertyDto);
+  update(@Param('id') id: string, @Body() data: UpdatePropertyDto) {
+    return this.propertiesService.update(id, data);
   }
 
   @Delete(':id')
@@ -62,21 +56,5 @@ export class PropertiesController {
   @Get('/resources/types')
   listAvailablePropertyTypes() {
     return this.propertiesService.listAvailablePropertyTypes();
-  }
-
-  @ApiOperation({
-    summary:
-      'List of available features of properties available for property registration.',
-  })
-  @ApiResponse({
-    status: 200,
-    description: 'OK.',
-    schema: {
-      example: propertyFeaturesListExample,
-    },
-  })
-  @Get('/resources/features')
-  listAvailablePropertyFeatures() {
-    return this.propertiesService.listAvailablePropertyFeatures();
   }
 }

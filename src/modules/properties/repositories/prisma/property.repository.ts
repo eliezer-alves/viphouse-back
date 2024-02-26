@@ -7,6 +7,10 @@ type PropertyCreateInput = Omit<
   'propertyType' | 'features'
 > & {
   propertyTypeId: number;
+  features?: {
+    featureId: number;
+    value: number;
+  }[];
 };
 
 @Injectable()
@@ -39,10 +43,6 @@ export class PropertyRepository implements IPropertyRepository {
     return this.prisma.property.findUnique({
       where: {
         id: id,
-      },
-      include: {
-        propertyType: true,
-        features: true,
       },
     });
   }
