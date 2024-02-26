@@ -27,34 +27,24 @@ model PropertyType {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
-model PropertyFeature {
-  id          Int     @default(autoincrement()) @id
-  name        String
-  properties  FeaturesOnPproperties[]
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-}
 
 model Property {
   id              String  @db.VarChar(36)  @id @default(uuid())
   name            String
   description     String?
   propertyType    PropertyType    @relation(fields: [propertyTypeId], references: [id])
-  propertyTypeId  Int
-  features        FeaturesOnPproperties[]
+  propertyTypeId  Int  
+  room            Int  
+  bathroom        Int
+  suite           Int
+  kitchen         Int
+  livingRoom      Int 
+  garage          Int
+  laundry         Int
+  pool            Int
+  office          Int
+  garden          Int
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 }
-
-model FeaturesOnPproperties {
-  feature       PropertyFeature @relation(fields: [featureId], references: [id])
-  featureId     Int
-  property      Property @relation(fields: [propertyId], references: [id])
-  propertyId    String  @db.VarChar(36)
-  assignedAt    DateTime @default(now())
-  assignedBy    String
-
-  @@id([featureId, propertyId])
-}
-
 
