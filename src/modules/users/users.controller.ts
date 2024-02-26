@@ -16,8 +16,13 @@ import {
 } from '@nestjs/swagger';
 import { dataUserResponseExample } from './dto/show-user.dto';
 import { JwtAuthGuard } from '../auth/guards';
+import {
+  INTERNAL_SERVER_ERROR,
+  UNAUTHORIZED,
+} from 'src/shared/response.examples';
 
 @ApiTags('Users')
+@ApiResponse(INTERNAL_SERVER_ERROR)
 @Controller('users')
 export class UsersController {
   constructor(private readonly userService: UsersService) {}
@@ -54,6 +59,7 @@ export class UsersController {
       example: dataUserResponseExample,
     },
   })
+  @ApiResponse(UNAUTHORIZED)
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   @Get('me')
