@@ -6,7 +6,12 @@ import {
   Patch,
   Param,
   Delete,
+  UseInterceptors,
+  UploadedFiles,
+  ParseFilePipeBuilder,
+  HttpStatus,
 } from '@nestjs/common';
+import { FilesInterceptor } from '@nestjs/platform-express';
 import { PropertiesService } from './properties.service';
 import { CreatePropertyDto } from './dto/create-property.dto';
 import { UpdatePropertyDto } from './dto/update-property.dto';
@@ -16,6 +21,7 @@ import {
   INTERNAL_SERVER_ERROR,
   UNAUTHORIZED,
 } from 'src/shared/response.examples';
+import { UploadPropertyImagesDto } from './dto/upload-property-images.dto';
 
 @ApiTags('Properties')
 @ApiResponse(INTERNAL_SERVER_ERROR)
@@ -69,6 +75,31 @@ export class PropertiesController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.propertiesService.remove(id);
+  }
+
+  @ApiOperation({
+    summary: 'List of all available property types. The list is not paginated.',
+  })
+  @Post('/:id/images')
+  @UseInterceptors(FilesInterceptor('files'))
+  uploadImages(
+    @Param()
+    params: UploadPropertyImagesDto,
+    @UploadedFiles(
+      new ParseFilePipeBuilder()
+        .addFileTypeValidator({
+          fileType: 'jpeg',
+        })
+        .addMaxSizeValidator({
+          maxSize: 200000,
+        })
+        .build({
+          errorHttpStatusCode: HttpStatus.UNPROCESSABLE_ENTITY,
+        }),
+    )
+    files: Express.Multer.File,
+  ) {
+    return this.propertiesService.uploadImages(files, params.id);
   }
 
   @ApiOperation({

@@ -30,6 +30,13 @@ export class PropertiesService {
     return this.propertyRepository.remove(id);
   }
 
+  uploadImages(files: any, propertyId: string) {
+    return {
+      files: 'vazio',
+      propertyId,
+    };
+  }
+
   listAvailablePropertyTypes() {
     return this.propertyTyeRepository.list();
   }
