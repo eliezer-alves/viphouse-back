@@ -10,15 +10,16 @@ import {
 import { PropertiesService } from './properties.service';
 import { CreatePropertyDto } from './dto/create-property.dto';
 import { UpdatePropertyDto } from './dto/update-property.dto';
-import { ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { propertyTypesListExample } from './data.example';
 import {
   INTERNAL_SERVER_ERROR,
   UNAUTHORIZED,
 } from 'src/shared/response.examples';
 
-@Controller('properties')
+@ApiTags('Properties')
 @ApiResponse(INTERNAL_SERVER_ERROR)
+@Controller('properties')
 export class PropertiesController {
   constructor(private readonly propertiesService: PropertiesService) {}
 
