@@ -8,7 +8,7 @@ import { IFileUploader } from 'src/shared/protocols';
 export class PropertiesService {
   constructor(
     private propertyRepository: IPropertyRepository,
-    private propertyTyeRepository: IPropertyTypeRepository,
+    private propertyTypeRepository: IPropertyTypeRepository,
     private fileUploader: IFileUploader,
   ) {}
 
@@ -41,6 +41,6 @@ export class PropertiesService {
   }
 
   listAvailablePropertyTypes() {
-    return this.propertyTyeRepository.list();
+    return this.propertyTypeRepository.list();
   }
 }
