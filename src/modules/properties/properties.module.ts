@@ -9,6 +9,8 @@ import {
 import { PrismaClient } from '@prisma/client';
 import { PrismaClientConnection } from 'src/infra';
 import { IsValidPropertyId, IsValidPropertyTypeId } from './validation-rules';
+import { AWSFileUploader } from 'src/infra/aws-file-uploader';
+import { IFileUploader } from 'src/shared/protocols';
 
 @Module({
   controllers: [PropertiesController],
@@ -27,6 +29,10 @@ import { IsValidPropertyId, IsValidPropertyTypeId } from './validation-rules';
     {
       provide: IPropertyTypeRepository,
       useClass: PrismaRepository.PropertyTypeRepository,
+    },
+    {
+      provide: IFileUploader,
+      useClass: AWSFileUploader,
     },
   ],
 })

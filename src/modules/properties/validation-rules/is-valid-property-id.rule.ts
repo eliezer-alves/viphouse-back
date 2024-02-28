@@ -11,12 +11,8 @@ export class IsValidPropertyId implements ValidatorConstraintInterface {
   constructor(private readonly propertyRepository: IPropertyRepository) {}
 
   validate(propertyId: any) {
-    console.log(propertyId);
-
     if (!propertyId || typeof propertyId !== 'string') return false;
     return this.propertyRepository.find(propertyId).then((result) => {
-      console.log('propertyId', propertyId);
-      console.log('result', result);
       return result !== null;
     });
   }

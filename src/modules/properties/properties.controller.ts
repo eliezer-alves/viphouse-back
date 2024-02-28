@@ -97,7 +97,7 @@ export class PropertiesController {
           errorHttpStatusCode: HttpStatus.UNPROCESSABLE_ENTITY,
         }),
     )
-    files: Express.Multer.File,
+    files: Express.Multer.File[],
   ) {
     return this.propertiesService.uploadImages(files, params.id);
   }
