@@ -44,7 +44,17 @@ model Property {
   pool            Int @default(0)
   office          Int @default(0)
   garden          Int @default(0)
+  images          PropertyImage[]
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
+}
+
+model PropertyImage {
+  id          String   @db.VarChar(36)  @id @default(uuid())
+  property    Property @relation(fields: [propertyId], references: [id])
+  propertyId  String
+  imageUrl    String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
