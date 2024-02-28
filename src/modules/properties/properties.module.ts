@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { PropertiesService } from './properties.service';
 import { PropertiesController } from './properties.controller';
 import {
+  IPropertyImageRepository,
   IPropertyRepository,
   IPropertyTypeRepository,
   PrismaRepository,
@@ -25,6 +26,10 @@ import { IFileUploader } from 'src/shared/protocols';
     {
       provide: IPropertyRepository,
       useClass: PrismaRepository.PropertyRepository,
+    },
+    {
+      provide: IPropertyImageRepository,
+      useClass: PrismaRepository.PropertyImageRepository,
     },
     {
       provide: IPropertyTypeRepository,

@@ -21,7 +21,7 @@ export class AWSFileUploader implements IFileUploader {
     return `${file.filename}-${timestamp}.${file.mimetype}`;
   }
 
-  private async uploadFile(file: Express.Multer.File): Promise<string> {
+  private async uploadFile(file: Express.Multer.File) {
     const timestamp = Date.now();
     file.filename = file.originalname;
     const fileKey = this.generateFileKey(file, timestamp);
@@ -41,16 +41,18 @@ export class AWSFileUploader implements IFileUploader {
 
     try {
       const s3Response = await this.s3Client.upload(params).promise();
-      console.log(s3Response);
-      return s3Response.Location;
+
+      return {
+        imageUrl: s3Response.Location,
+        imageKey: s3Response.Key,
+        bucket: s3Response.Bucket,
+      };
     } catch (e) {
       console.log(e);
     }
   }
 
-  async upload(
-    files: Express.Multer.File | Express.Multer.File[],
-  ): Promise<string | string[] | undefined> {
+  async upload(files: Express.Multer.File | Express.Multer.File[]) {
     try {
       if (Array.isArray(files)) {
         const paths = await Promise.all(
@@ -60,7 +62,7 @@ export class AWSFileUploader implements IFileUploader {
       }
 
       const path = await this.uploadFile(files);
-      return path;
+      return [path];
     } catch {
       return undefined;
     }
