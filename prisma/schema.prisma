@@ -50,10 +50,12 @@ model Property {
 }
 
 model PropertyImage {
-  id          String   @db.VarChar(36)  @id @default(uuid())
+  id          Int      @default(autoincrement()) @id
   property    Property @relation(fields: [propertyId], references: [id])
-  propertyId  String
+  propertyId  String   @db.VarChar(36)
   imageUrl    String
+  imageKey    String
+  bucket      String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
