@@ -1,20 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { CreatePropertyDto } from './dto/create-property.dto';
 import { UpdatePropertyDto } from './dto/update-property.dto';
-import {
-  IPropertyRepository,
-  IPropertyImageRepository,
-  IPropertyTypeRepository,
-} from './repositories';
-import { IFileUploader } from 'src/shared/protocols';
-
+import { IPropertyRepository, IPropertyTypeRepository } from './repositories';
 @Injectable()
 export class PropertiesService {
   constructor(
     private propertyRepository: IPropertyRepository,
-    private propertyImageRepository: IPropertyImageRepository,
     private propertyTypeRepository: IPropertyTypeRepository,
-    private fileUploader: IFileUploader,
   ) {}
 
   create(data: CreatePropertyDto) {
@@ -35,13 +27,6 @@ export class PropertiesService {
 
   remove(id: string) {
     return this.propertyRepository.remove(id);
-  }
-
-  async uploadImages(files: Express.Multer.File[], propertyId: string) {
-    const uploadedFiles = (await this.fileUploader.upload(files)).map(
-      (file) => ({ ...file, propertyId }),
-    );
-    return this.propertyImageRepository.createMany(uploadedFiles);
   }
 
   listAvailablePropertyTypes() {

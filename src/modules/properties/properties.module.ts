@@ -1,17 +1,14 @@
 import { Module } from '@nestjs/common';
+import { PrismaClient } from '@prisma/client';
+import { PrismaClientConnection } from 'src/infra';
 import { PropertiesService } from './properties.service';
 import { PropertiesController } from './properties.controller';
 import {
-  IPropertyImageRepository,
   IPropertyRepository,
   IPropertyTypeRepository,
   PrismaRepository,
 } from './repositories';
-import { PrismaClient } from '@prisma/client';
-import { PrismaClientConnection } from 'src/infra';
 import { IsValidPropertyId, IsValidPropertyTypeId } from './validation-rules';
-import { AWSFileUploader } from 'src/infra/aws-file-uploader';
-import { IFileUploader } from 'src/shared/protocols';
 
 @Module({
   controllers: [PropertiesController],
@@ -28,17 +25,10 @@ import { IFileUploader } from 'src/shared/protocols';
       useClass: PrismaRepository.PropertyRepository,
     },
     {
-      provide: IPropertyImageRepository,
-      useClass: PrismaRepository.PropertyImageRepository,
-    },
-    {
       provide: IPropertyTypeRepository,
       useClass: PrismaRepository.PropertyTypeRepository,
     },
-    {
-      provide: IFileUploader,
-      useClass: AWSFileUploader,
-    },
   ],
+  exports: [IsValidPropertyId, IsValidPropertyTypeId],
 })
 export class PropertiesModule {}
